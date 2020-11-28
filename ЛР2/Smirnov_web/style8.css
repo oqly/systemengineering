@@ -28,6 +28,7 @@ input {
     width: 100%;
     padding: 10px;
     border: none;
+    color: white;
 }
 label {
     color: white;
@@ -53,6 +54,7 @@ textarea {
     width: 100%;
     padding: 10px;
     border: none;
+    color: white;
 }
 .f {
     background-color: #ca2a3b;
