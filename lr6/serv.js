@@ -7,6 +7,34 @@ let last_id = 0;
 const requestListener = function (req, res) {
     let ur = url.parse(req.url);
     let path = ur.pathname.slice(1).split("/");
+
+    /*
+    if (ur.query !== null) {
+        var searchParams = new URLSearchParams(ur.query);
+
+        for (let p of searchParams) {
+            console.log(p);
+        }
+        console.log(searchParams.get("name"));
+
+        var id = searchParams.get("id");
+    }
+    if (path[0] !== "guide") {
+        res.statusCode = 400;
+        res.end("Bad request");
+    }
+    else {
+        res.setHeader("Content-Type", "application/json");
+        switch (req.method) {
+            case "GET": get(id, res); break;
+            case "POST": post(searchParams, res); break;
+            case "PUT": put(id, searchParams, res); break;
+            case "DELETE": del(id, res); break;
+            default: res.end(); return;
+        }
+    }
+    */
+
     if (ur.query !== null){
         let quer = ur.query.split("=");
         if (quer[0] === "id") {
@@ -27,6 +55,7 @@ const requestListener = function (req, res) {
             default: res.end(); return;
         }
     }
+
 }
 
 function get(id, res) {
@@ -41,30 +70,30 @@ function get(id, res) {
                 res.end("Bad request 2");
             }
         }
-        else {
-            getAll(res);
-        }
     }
     else {
-        res.statusCode = 400;
-        res.end("Bad request 1");
+        getAll(res);
     }
 }
 
 function getAll(res) {
+    console.log("getAll done");
     res.statusCode = 200;
     res.end(JSON.stringify(guide));
 }
 
 function post(req, res) {
     let body = "";
+    let idnew = last_id++;
+
     req.on("data", (data) => {
         body += data;
     });
     req.on("end", ()=>{
-        guide.push(JSON.parse(body));
+        /*guide.push(JSON.parse(body));*/
+        guide[idnew] = JSON.parse(body);
     });
-    let idnew = ++last_id;
+    console.log(guide);
     res.statusCode = 200;
     res.end(JSON.stringify(idnew));
 }
