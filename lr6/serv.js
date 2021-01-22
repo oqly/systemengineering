@@ -7,7 +7,9 @@ let last_id = 0;
 const requestListener = function (req, res) {
     let ur = url.parse(req.url);
     let path = ur.pathname.slice(1).split("/");
-
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader("Access-Control-Allow-Methods", "*");
+    res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
     /*
     if (ur.query !== null) {
         var searchParams = new URLSearchParams(ur.query);

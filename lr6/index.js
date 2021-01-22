@@ -1,19 +1,18 @@
-const url = "http://localhost:8080";
+const url = "http://127.0.0.1:8080";
 let guides = [];
 
 const getGuide = () => {
-    return fetch(`${url}/guide`, {method: "GET", mode: 'no-cors'}).then((res) => res.json()).catch(() => []);
+    return fetch(`${url}/guide`, {method: "GET"}).then((res) => res.json()).catch(() => []);
 }
 
 const del = (id) => {
-    return fetch(`${url}/guide?id=${id}`, {method: "DELETE", mode: 'no-cors'}).then((res) => res.json()).catch(() => []);
+    return fetch(`${url}/guide?id=${id}`, {method: "DELETE"}).then((res) => res.json()).catch(() => []);
 }
 
 const post = (name, email, phone) => {
     console.log("start post");
     return fetch(`${url}/guide`, {
         method: "POST",
-        mode: 'no-cors',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -28,7 +27,6 @@ const post = (name, email, phone) => {
 const edit = (id, name, email, phone) => {
     return fetch(`${url}/guide?id=${id}`, {
         method: "PUT",
-        mode: 'no-cors',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -119,6 +117,7 @@ const createTable = (id, body) => {
 
         return Elem;
     }
+    return "";
 }
 
 const refresh = () => {
